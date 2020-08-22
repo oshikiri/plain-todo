@@ -1,0 +1,20 @@
+title: Example tasks
+
+tasks:
+  - name: task1
+    end: 2020-08-10
+    children:
+      - name: subtask1
+        children:
+          - name: subsubtask1
+            memo: |
+              some descriptions
+          - name: subsubtask2
+            end: 2020-08-01
+            status: doing
+      - name: subtask2
+        end: 2020-07-25
+        status: cancelled
+      - name: subtask3
+        end: 2020-07-20
+        status: done

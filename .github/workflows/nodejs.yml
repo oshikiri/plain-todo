@@ -1,0 +1,27 @@
+name: test
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build
+          npm test
+        env:
+          CI: true
+
+      - name: e2e test
+        run: |
+          npm install -g .
+          todo --version
+          pushd test/ && ./e2e.bash && popd
