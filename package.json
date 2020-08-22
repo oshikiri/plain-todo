@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/tsc",
-    "format": "node_modules/.bin/prettier --write src/* todos/*.todo.yml",
+    "format": "node_modules/.bin/prettier --write src/* docs/schema.json package.json",
     "test": "echo \"no test\""
   },
   "bin": {
