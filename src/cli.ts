@@ -48,4 +48,5 @@ require("yargs")
       "tree" : Show tree
       "date" : Show flattened tasks sorted by date
     `,
-  }).argv;
+  })
+  .demandCommand(1).argv;
