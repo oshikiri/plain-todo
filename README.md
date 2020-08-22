@@ -39,6 +39,23 @@ $ todo print test/fixtures/readme-example.todo.yml --mode date
 08/10     /task1/subtask1/subsubtask1
 ```
 
+## Setting for VS Code
+
+You can validate and complete at `*.todo.yml` using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
+
+```json
+// .vscode/settings.json
+
+{
+  "yaml.schemas": {
+    "https://oshikiri.github.io/plain-todo/schema.json": [
+        "*.todo.yml",
+        "*.todo.yaml"
+    ]
+  }
+}
+```
+
 ## Development
 ### Install dependencies
 ```sh
