@@ -1,0 +1,12 @@
+title: date mode で children がすべて done の場合は親タスクを表示する
+
+tasks:
+  - name: parent
+    end: 2020-08-03
+    children:
+      - name: child1
+        end: 2020-08-01
+        status: done
+      - name: child2
+        end: 2020-08-02
+        status: done

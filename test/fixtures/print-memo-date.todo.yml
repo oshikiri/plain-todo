@@ -1,0 +1,12 @@
+title: Print memo using --memo option
+
+tasks:
+  - name: parent
+    end: 2020-08-03
+    children:
+      - name: child1
+        end: 2020-08-01
+        memo: |
+          memo1
+          memo2
+      - name: child2

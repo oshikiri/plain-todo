@@ -1,0 +1,17 @@
+title: requires のテスト
+
+tasks:
+  - name: parent
+    end: 2020-08-03
+    requires:
+      - r1
+      - r2
+
+  - name: requires1
+    alias: r1
+    end: 2020-08-01
+    status: done
+  - name: requires2
+    alias: r2
+    end: 2020-08-02
+    status: todo
