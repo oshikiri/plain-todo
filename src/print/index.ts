@@ -32,7 +32,7 @@ export function mainPrint(argv: any) {
         const tasks = utils.fillParentsInformations(yml.tasks, "", [undefined]);
 
         if (argv.watch) {
-          console.clear();
+          console.clear(); // FIXME
           console.log(`${" ".repeat(7) + yml.title}\n${"=".repeat(60)}\n`);
         }
 
@@ -52,7 +52,7 @@ export function mainPrint(argv: any) {
           );
         }
       } catch (e) {
-        console.clear();
+        console.clear(); // FIXME
         console.log(e.message);
       }
     }
