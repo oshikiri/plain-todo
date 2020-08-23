@@ -49,4 +49,9 @@ require("yargs")
       "date" : Show flattened tasks sorted by date
     `,
   })
+  .option("stats", {
+    type: "boolean",
+    default: false,
+    description: `Show stats of parent tasks`,
+  })
   .demandCommand(1).argv;

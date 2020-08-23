@@ -18,6 +18,9 @@ export function mainPrint(argv: any) {
   let lastModifiedAt = new Date(0);
 
   const showMemo = argv.memo;
+  const configs = {
+    showStats: argv.stats,
+  };
 
   function loop() {
     const modifiedAt = io.getLastModifiedAt(yamlPath);
@@ -39,7 +42,14 @@ export function mainPrint(argv: any) {
           printSortedByDate(tasks, dateFormat, targetStatuses, showMemo);
         } else {
           const aliases = utils.extractAliases(tasks);
-          printTree(tasks, dateFormat, targetStatuses, aliases, showMemo);
+          printTree(
+            tasks,
+            dateFormat,
+            targetStatuses,
+            aliases,
+            showMemo,
+            configs
+          );
         }
       } catch (e) {
         console.clear();
