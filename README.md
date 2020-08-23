@@ -41,7 +41,7 @@ $ todo print test/fixtures/readme-example.todo.yml --mode date
 
 ## Setting for VS Code
 
-You can validate and complete at `*.todo.yml` using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
+You can validate schema and enable auto-completion using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
 
 ```json
 // .vscode/settings.json
