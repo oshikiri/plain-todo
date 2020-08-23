@@ -1,0 +1,9 @@
+title: --stats option
+
+tasks:
+  - name: task1
+    children:
+      - name: subtask1-1
+      - name: subtask1-2
+      - name: subtask1-3
+        status: done

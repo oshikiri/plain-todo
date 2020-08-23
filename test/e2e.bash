@@ -21,6 +21,7 @@ test_todo requires
 test_todo children-all-done "--mode date"
 test_todo requires-all-done "--mode date"
 test_todo invalid
+test_todo stats "--stats"
 
 test_todo print-memo-tree "--memo"
 test_todo print-memo-date "--memo --mode date"
