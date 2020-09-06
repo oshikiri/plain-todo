@@ -32,9 +32,8 @@
       "additionalProperties": false,
       "properties": {
         "name": {
-          "description": "Name of this task\n\nGive a short and descriptive name (max 50 characters)",
-          "type": "string",
-          "maxLength": 50
+          "description": "Name of this task\n\nGive a short and descriptive name",
+          "type": "string"
         },
         "alias": {
           "description": "Alias of this task\n\nUsed by \"requires\" field",

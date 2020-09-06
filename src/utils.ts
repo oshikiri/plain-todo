@@ -4,6 +4,8 @@ import * as term from "terminal-kit";
 import { Task } from "./types";
 import { activeStatuses } from "./constants/statuses";
 
+const MAX_TASK_NAME_LENGTH = 30; // TODO: add to config
+
 export function stringifyDate(dateStr: string, dateFormat: string) {
   return moment(dateStr).utc().format(dateFormat);
 }
@@ -61,8 +63,12 @@ export function fillParentsInformations(
     tasks[i] = new Task(tasks[i]);
 
     const task = tasks[i];
+    let taskName = task.name;
+    if (taskName.length > MAX_TASK_NAME_LENGTH) {
+      taskName = taskName.slice(0, MAX_TASK_NAME_LENGTH - 2) + "…";
+    }
     const dates = parentDates.concat([task.end]);
-    const absolutePath = parentAbsolutePath + "/" + task.name;
+    const absolutePath = parentAbsolutePath + "/" + taskName;
 
     tasks[i].absolutePath = absolutePath;
     tasks[i].isDefaultStatus = task.status === undefined;
