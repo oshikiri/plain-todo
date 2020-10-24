@@ -1,5 +1,5 @@
-08/03     parent
-08/01  -      child1
-                memo1
-                memo2
-08/03  -      child2
+0803     parent
+0801  -      child1
+               memo1
+               memo2
+0803  -      child2

@@ -37,7 +37,7 @@ export function mainPrint(argv: any) {
         }
 
         const dateFormat =
-          yml && yml.configs ? yml.configs["date-format"] : "MM/DD";
+          yml && yml.configs ? yml.configs["date-format"] : "MMDD";
         if (argv.mode == "date") {
           printSortedByDate(tasks, dateFormat, targetStatuses, showMemo);
         } else {

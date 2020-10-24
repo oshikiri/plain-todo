@@ -1,4 +1,4 @@
-08/10     task1
-08/10         subtask1
-08/10  -          subsubtask1
-08/01  *          subsubtask2
+0810     task1
+0810         subtask1
+0810  -          subsubtask1
+0801  *          subsubtask2
