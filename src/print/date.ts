@@ -4,14 +4,18 @@ import { statusSymbols } from "./../constants/status_symbols";
 import { sizes } from "./format";
 
 function buildLineModeDate(task: Task, dateFormat: string): string {
-  const date: string = task.end
+  const dateStart: string = task.start
+    ? utils.stringifyDate(task.start, dateFormat)
+    : "";
+  const dateEnd: string = task.end
     ? utils.stringifyDate(task.end, dateFormat)
     : "";
 
   const status = task.isDefaultStatus ? "" : statusSymbols[task.status];
 
   const line =
-    date.padEnd(dateFormat.length + sizes.afterDate, " ") +
+    dateStart.padEnd(dateFormat.length + 1, " ") +
+    dateEnd.padEnd(dateFormat.length + sizes.afterDate, " ") +
     status.padEnd(sizes.widthStatus + sizes.afterStatus, " ") +
     task.absolutePath;
 

@@ -3,6 +3,7 @@ import { activeStatuses } from "./constants/statuses";
 export class Task {
   name: string;
   alias: string;
+  start: string;
   end: string;
   status: string;
   memo: string;
@@ -16,6 +17,7 @@ export class Task {
   constructor(task: Task) {
     this.name = task.name;
     this.alias = task.alias;
+    this.start = task.start;
     this.end = task.end;
     this.status = task.status;
     this.memo = task.memo;
