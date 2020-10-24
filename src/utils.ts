@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as dayjs from "dayjs";
 import * as term from "terminal-kit";
 
 import { Task } from "./types";
@@ -7,12 +7,12 @@ import { activeStatuses } from "./constants/statuses";
 const MAX_TASK_NAME_LENGTH = 30; // TODO: add to config
 
 export function stringifyDate(dateStr: string, dateFormat: string) {
-  return moment(dateStr).utc().format(dateFormat);
+  return dayjs(dateStr).format(dateFormat);
 }
 
 export function compareDateStr(x: Task, y: Task) {
-  const dateX = moment(x.end || "9999-12-31");
-  const dateY = moment(y.end || "9999-12-31");
+  const dateX = dayjs(x.end || "9999-12-31");
+  const dateY = dayjs(y.end || "9999-12-31");
   return dateX.diff(dateY);
 }
 
