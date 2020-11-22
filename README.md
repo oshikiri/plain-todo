@@ -29,19 +29,19 @@ tasks:
         status: done
 
 $ todo print test/fixtures/readme-example.todo.yml
-08/10     task1
-08/10         subtask1
-08/10  -          subsubtask1
-08/01  *          subsubtask2
+0810     task1
+0810         subtask1
+0810  -          subsubtask1
+0801  *          subsubtask2
 
 $ todo print test/fixtures/readme-example.todo.yml --mode date
-08/01  *  /task1/subtask1/subsubtask2
-08/10     /task1/subtask1/subsubtask1
+     0801  *  /task1/subtask1/subsubtask2
+     0810     /task1/subtask1/subsubtask1
 ```
 
 ## Setting for VS Code
 
-You can validate schema and enable auto-completion using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
+You can run schema validation and auto-completion using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
 
 ```json
 // .vscode/settings.json
