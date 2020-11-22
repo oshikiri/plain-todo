@@ -3,8 +3,8 @@ const blessed = require("neo-blessed");
 import * as utils from "../utils";
 import { statuses as allStatuses } from "../constants/statuses";
 
-import { printSortedByDate } from "./date";
-import { printTree } from "./tree";
+import { createSortedByDateStr } from "./date";
+import { createTreeStr } from "./tree";
 import * as io from "./io";
 
 export function mainPrint(argv: any) {
@@ -72,7 +72,7 @@ export function mainPrint(argv: any) {
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
         if (argv.mode == "date") {
-          screenContent += printSortedByDate(
+          screenContent += createSortedByDateStr(
             tasks,
             dateFormat,
             targetStatuses,
@@ -80,7 +80,7 @@ export function mainPrint(argv: any) {
           );
         } else {
           const aliases = utils.extractAliases(tasks);
-          screenContent += printTree(
+          screenContent += createTreeStr(
             tasks,
             dateFormat,
             targetStatuses,

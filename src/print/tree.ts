@@ -39,7 +39,7 @@ function buildLineModeTree(
   return line;
 }
 
-export function printTree(
+export function createTreeStr(
   tasks: Task[],
   dateFormat: string,
   targetStatuses: string[],
@@ -68,7 +68,7 @@ export function printTree(
     }
 
     if (task.hasChildren()) {
-      content += printTree(
+      content += createTreeStr(
         task.children,
         dateFormat,
         targetStatuses,

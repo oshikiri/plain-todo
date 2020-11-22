@@ -22,7 +22,7 @@ function buildLineModeDate(task: Task, dateFormat: string): string {
   return line;
 }
 
-export function printSortedByDate(
+export function createSortedByDateStr(
   tasks: Task[],
   dateFormat: string,
   targetStatuses: string[],
