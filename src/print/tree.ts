@@ -46,14 +46,14 @@ export function printTree(
   aliases: { [name: string]: Task },
   showMemo: boolean,
   configs: any
-) {
+): string {
+  let content = "";
   for (const task of tasks) {
     if (!targetStatuses.includes(task.status)) {
       continue;
     }
 
-    const lineStr = buildLineModeTree(task, dateFormat, configs["showStats"]);
-    utils.printLine(lineStr, task.status);
+    content += buildLineModeTree(task, dateFormat, configs["showStats"]) + "\n";
 
     if (showMemo && task.memo) {
       const indent = " ".repeat(
@@ -64,11 +64,11 @@ export function printTree(
           sizes.depthSize * (task.depth - 1) +
           sizes.beforeMemo
       );
-      utils.printGrey(task.memo.replace(/\n$/, "").replace(/^/gm, indent));
+      content += task.memo.replace(/\n$/, "").replace(/^/gm, indent) + "\n";
     }
 
     if (task.hasChildren()) {
-      printTree(
+      content += printTree(
         task.children,
         dateFormat,
         targetStatuses,
@@ -85,10 +85,10 @@ export function printTree(
         requireTask.depth = task.depth + 1;
 
         if (targetStatuses.includes(requireTask.status)) {
-          const lineStr = buildLineModeTree(requireTask, dateFormat, false);
-          utils.printLine(lineStr, requireTask.status);
+          content += buildLineModeTree(requireTask, dateFormat, false) + "\n";
         }
       }
     }
   }
+  return content;
 }

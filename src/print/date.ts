@@ -27,21 +27,23 @@ export function printSortedByDate(
   dateFormat: string,
   targetStatuses: string[],
   showMemo: boolean
-) {
+): string {
   const flattened = utils.flattenTasks(tasks);
   flattened.sort(utils.compareDateStr);
+  let content = "";
 
   for (const task of flattened) {
     const isExcludedStatus = !targetStatuses.includes(task.status);
     if (isExcludedStatus || task.hasActiveChildren()) {
       continue;
     }
-    const lineStr = buildLineModeDate(task, dateFormat);
-    console.log(lineStr);
+    content += buildLineModeDate(task, dateFormat) + "\n";
 
     if (showMemo && task.memo) {
       const indent = " ".repeat(sizes.beforeMemo);
-      utils.printGrey(task.memo.replace(/\n$/, "").replace(/^/gm, indent));
+      content += task.memo.replace(/\n$/, "").replace(/^/gm, indent) + "\n";
     }
   }
+
+  return content;
 }
