@@ -29,7 +29,8 @@ export function mainPrint(argv: any) {
 
       try {
         const yml: any = io.loadYaml(yamlPath);
-        const tasks = utils.fillParentsInformations(yml.tasks, "", [undefined]);
+        let tasks = utils.extractSubtree(yml.tasks, argv.subtree);
+        tasks = utils.fillParentsInformations(tasks, "", [undefined]);
 
         if (argv.watch) {
           console.clear(); // FIXME

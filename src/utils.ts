@@ -90,3 +90,19 @@ export function fillParentsInformations(
   }
   return tasks;
 }
+
+export function extractSubtree(tasks: Task[], subtreePath: string): Task[] {
+  let parsedPath = subtreePath.split("/");
+  if (subtreePath == "/" || parsedPath.length <= 1) {
+    return tasks;
+  }
+  parsedPath = parsedPath.slice(1);
+  let selectedTasks = tasks;
+  for (const name of parsedPath) {
+    selectedTasks = selectedTasks.find((t) => t.name == name)?.children;
+    if (!selectedTasks) {
+      throw Error(`Invalid --subtree: ${subtreePath}`);
+    }
+  }
+  return selectedTasks;
+}

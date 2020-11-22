@@ -54,4 +54,9 @@ require("yargs")
     default: false,
     description: `Show stats of parent tasks`,
   })
+  .option("subtree", {
+    type: "string",
+    default: "/",
+    description: "Show subtree",
+  })
   .demandCommand(1).argv;
