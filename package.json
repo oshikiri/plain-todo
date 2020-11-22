@@ -23,6 +23,7 @@
   "dependencies": {
     "dayjs": "^1.9.4",
     "js-yaml": "^3.14.0",
+    "neo-blessed": "^0.2.0",
     "terminal-kit": "^1.44.0",
     "yargs": "^16.1.0"
   },
