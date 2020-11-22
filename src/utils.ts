@@ -1,8 +1,6 @@
 import * as dayjs from "dayjs";
-import * as term from "terminal-kit";
 
 import { Task } from "./types";
-import { activeStatuses } from "./constants/statuses";
 
 export function stringifyDate(dateStr: string, dateFormat: string) {
   return dayjs(dateStr).format(dateFormat);
@@ -38,18 +36,6 @@ export function extractAliases(tasks: Task[]): { [name: string]: Task } {
     }
   }
   return aliases;
-}
-
-export function printLine(line: string, status: string) {
-  let terminal = term.terminal;
-  if (!activeStatuses.includes(status)) {
-    terminal = terminal.grey;
-  }
-  terminal(line)("\n");
-}
-
-export function printGrey(line: string) {
-  term.terminal.grey(line)("\n");
 }
 
 export function fillParentsInformations(

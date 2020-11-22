@@ -1,8 +1,10 @@
+const blessed = require("neo-blessed");
+
 import * as utils from "../utils";
 import { statuses as allStatuses } from "../constants/statuses";
 
-import { printSortedByDate } from "./date";
-import { printTree } from "./tree";
+import { createSortedByDateStr } from "./date";
+import { createTreeStr } from "./tree";
 import * as io from "./io";
 
 export function mainPrint(argv: any) {
@@ -22,10 +24,36 @@ export function mainPrint(argv: any) {
     showStats: argv.stats,
   };
 
+  let intervalId: number;
+  let screen: any;
+  let tab: any;
+
+  if (argv.watch) {
+    screen = blessed.screen({
+      smartCSR: false,
+      warnings: false,
+      fullUnicode: true,
+    });
+
+    tab = blessed.box({
+      parent: screen,
+      scrollable: true,
+      keys: true,
+      vi: true,
+      alwaysScroll: true,
+    });
+
+    screen.key("q", function () {
+      clearInterval(intervalId);
+      return screen.destroy();
+    });
+  }
+
   function loop() {
     const modifiedAt = io.getLastModifiedAt(yamlPath);
     if (modifiedAt > lastModifiedAt) {
       lastModifiedAt = modifiedAt;
+      let screenContent = "";
 
       try {
         const yml: any = io.loadYaml(yamlPath);
@@ -39,16 +67,20 @@ export function mainPrint(argv: any) {
         );
 
         if (argv.watch) {
-          console.clear(); // FIXME
-          console.log(`${" ".repeat(7) + yml.title}\n${"=".repeat(60)}\n`);
+          screenContent += `${" ".repeat(7) + yml.title}\n${"=".repeat(60)}\n`;
         }
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
         if (argv.mode == "date") {
-          printSortedByDate(tasks, dateFormat, targetStatuses, showMemo);
+          screenContent += createSortedByDateStr(
+            tasks,
+            dateFormat,
+            targetStatuses,
+            showMemo
+          );
         } else {
           const aliases = utils.extractAliases(tasks);
-          printTree(
+          screenContent += createTreeStr(
             tasks,
             dateFormat,
             targetStatuses,
@@ -58,14 +90,20 @@ export function mainPrint(argv: any) {
           );
         }
       } catch (e) {
-        console.clear(); // FIXME
-        console.log(e.message);
+        screenContent += e.message + "\n";
+      } finally {
+        if (argv.watch) {
+          tab.setContent(screenContent);
+          screen.render();
+        } else {
+          process.stdout.write(screenContent);
+        }
       }
     }
   }
 
   loop();
   if (argv.watch) {
-    setInterval(loop, 1000);
+    intervalId = <any>setInterval(loop, 1000);
   }
 }
