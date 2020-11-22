@@ -4,8 +4,6 @@ import * as term from "terminal-kit";
 import { Task } from "./types";
 import { activeStatuses } from "./constants/statuses";
 
-const MAX_TASK_NAME_LENGTH = 30; // TODO: add to config
-
 export function stringifyDate(dateStr: string, dateFormat: string) {
   return dayjs(dateStr).format(dateFormat);
 }
@@ -57,15 +55,16 @@ export function printGrey(line: string) {
 export function fillParentsInformations(
   tasks: Task[],
   parentAbsolutePath: string,
-  parentDates: any
+  parentDates: any,
+  maxLengthTaskName: number
 ) {
   for (const i in tasks) {
     tasks[i] = new Task(tasks[i]);
 
     const task = tasks[i];
     let taskName = task.name;
-    if (taskName.length > MAX_TASK_NAME_LENGTH) {
-      taskName = taskName.slice(0, MAX_TASK_NAME_LENGTH - 2) + "…";
+    if (taskName.length > maxLengthTaskName) {
+      taskName = taskName.slice(0, maxLengthTaskName - 2) + "…";
     }
     const dates = parentDates.concat([task.end]);
     const absolutePath = parentAbsolutePath + "/" + taskName;
@@ -84,7 +83,8 @@ export function fillParentsInformations(
       tasks[i].children = fillParentsInformations(
         task.children,
         absolutePath,
-        dates
+        dates,
+        maxLengthTaskName
       );
     }
   }

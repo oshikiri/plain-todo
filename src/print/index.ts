@@ -29,16 +29,21 @@ export function mainPrint(argv: any) {
 
       try {
         const yml: any = io.loadYaml(yamlPath);
+        const maxLengthTaskName = yml.configs?.["max-length-task-name"] || 20;
         let tasks = utils.extractSubtree(yml.tasks, argv.subtree);
-        tasks = utils.fillParentsInformations(tasks, "", [undefined]);
+        tasks = utils.fillParentsInformations(
+          tasks,
+          "",
+          [undefined],
+          maxLengthTaskName
+        );
 
         if (argv.watch) {
           console.clear(); // FIXME
           console.log(`${" ".repeat(7) + yml.title}\n${"=".repeat(60)}\n`);
         }
 
-        const dateFormat =
-          yml && yml.configs ? yml.configs["date-format"] : "MMDD";
+        const dateFormat = yml?.configs?.["date-format"] || "MMDD";
         if (argv.mode == "date") {
           printSortedByDate(tasks, dateFormat, targetStatuses, showMemo);
         } else {
