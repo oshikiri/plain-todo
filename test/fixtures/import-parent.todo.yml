@@ -1,0 +1,11 @@
+title: parent
+
+tasks:
+  - name: parent1
+    children:
+      - name: parent1-1
+  - name: parent2
+    children:
+      - name: parent2-1
+        import: ./import-child.todo.yml
+      - name: parent2-2

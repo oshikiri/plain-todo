@@ -1,0 +1,7 @@
+title: child
+
+tasks:
+  - name: child1
+    children:
+      - name: child1-1
+  - name: child2
