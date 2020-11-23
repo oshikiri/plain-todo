@@ -22,7 +22,8 @@ export class Task {
     this.end = task.end;
     this.status = task.status;
     this.memo = task.memo;
-    this.children = task.children;
+    this.import = task.import;
+    this.children = task.children || [];
     this.requires = task.requires;
   }
 

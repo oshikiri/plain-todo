@@ -63,7 +63,8 @@ export function mainPrint(argv: any) {
           tasks,
           "",
           [undefined],
-          maxLengthTaskName
+          maxLengthTaskName,
+          yamlPath
         );
 
         if (argv.watch) {

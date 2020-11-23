@@ -1,6 +1,8 @@
 import * as dayjs from "dayjs";
+import * as path from "path";
 
 import { Task } from "./types";
+import * as io from "./print/io";
 
 export function stringifyDate(dateStr: string, dateFormat: string) {
   return dayjs(dateStr).format(dateFormat);
@@ -48,7 +50,8 @@ export function fillParentsInformations(
   tasks: Task[],
   parentAbsolutePath: string,
   parentDates: any,
-  maxLengthTaskName: number
+  maxLengthTaskName: number,
+  yamlPath: string
 ) {
   for (const i in tasks) {
     tasks[i] = new Task(tasks[i]);
@@ -76,8 +79,25 @@ export function fillParentsInformations(
         task.children,
         absolutePath,
         dates,
-        maxLengthTaskName
+        maxLengthTaskName,
+        yamlPath
       );
+    }
+    if (task.import) {
+      const yamlPathImport = path.join(path.dirname(yamlPath), task.import);
+      if (io.fileExists(yamlPathImport)) {
+        const yml = io.loadYaml(yamlPathImport);
+        const tasksImport = fillParentsInformations(
+          yml.tasks,
+          absolutePath,
+          dates,
+          maxLengthTaskName,
+          yamlPathImport
+        );
+        tasks[i].children = tasks[i].children.concat(tasksImport);
+      } else {
+        throw Error(`File not found: ${yamlPathImport}`);
+      }
     }
   }
   return tasks;
