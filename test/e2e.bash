@@ -23,6 +23,7 @@ test_todo requires-all-done "--sort end"
 test_todo invalid
 test_todo stats "--stats"
 test_todo subtree "--subtree /1"
+test_todo import-parent
 
 test_todo print-memo-tree "--memo"
 test_todo print-memo-date "--memo --sort end"

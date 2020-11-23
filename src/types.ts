@@ -7,6 +7,7 @@ export class Task {
   end: string;
   status: string;
   memo: string;
+  import: string;
   children: Task[];
   requires: string[];
 

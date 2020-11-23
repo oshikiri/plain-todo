@@ -66,6 +66,10 @@
             "type": "string"
           }
         },
+        "import": {
+          "description": "Path of external file",
+          "type": "string"
+        },
         "memo": {
           "description": "Free text for this task",
           "type": "string"
