@@ -40,13 +40,14 @@ require("yargs")
     default: ["todo", "doing", "waiting"],
     description: "Which statuses do you want to show?",
   })
-  .option("mode", {
+  .option("sort", {
     type: "string",
-    default: "tree",
+    default: "default",
     description: `Display mode
 
-      "tree" : Show tree
-      "date" : Show flattened tasks sorted by date
+      "default" : Show tree
+      "start"   : Show flattened tasks sorted by start date
+      "end"     : Show flattened tasks sorted by end date
     `,
   })
   .option("stats", {

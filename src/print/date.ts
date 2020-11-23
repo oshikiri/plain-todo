@@ -26,10 +26,11 @@ export function createSortedByDateStr(
   tasks: Task[],
   dateFormat: string,
   targetStatuses: string[],
-  showMemo: boolean
+  showMemo: boolean,
+  sortFunction: (x: Task, y: Task) => number
 ): string {
   const flattened = utils.flattenTasks(tasks);
-  flattened.sort(utils.compareDateStr);
+  flattened.sort(sortFunction);
   let content = "";
 
   for (const task of flattened) {

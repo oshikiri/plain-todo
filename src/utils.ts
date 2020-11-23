@@ -6,7 +6,13 @@ export function stringifyDate(dateStr: string, dateFormat: string) {
   return dayjs(dateStr).format(dateFormat);
 }
 
-export function compareDateStr(x: Task, y: Task) {
+export function compareDateStartStr(x: Task, y: Task) {
+  const dateX = dayjs(x.start || "9999-12-31");
+  const dateY = dayjs(y.start || "9999-12-31");
+  return dateX.diff(dateY);
+}
+
+export function compareDateEndStr(x: Task, y: Task) {
   const dateX = dayjs(x.end || "9999-12-31");
   const dateY = dayjs(y.end || "9999-12-31");
   return dateX.diff(dateY);

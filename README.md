@@ -34,7 +34,7 @@ $ todo print test/fixtures/readme-example.todo.yml
 0810  -          subsubtask1
 0801  *          subsubtask2
 
-$ todo print test/fixtures/readme-example.todo.yml --mode date
+$ todo print test/fixtures/readme-example.todo.yml --sort end
      0801  *  /task1/subtask1/subsubtask2
      0810     /task1/subtask1/subsubtask1
 ```

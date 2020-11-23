@@ -1,4 +1,4 @@
-title: date mode で children がすべて done の場合は親タスクを表示する
+title: --sort end で children がすべて done の場合は親タスクを表示する
 
 tasks:
   - name: parent

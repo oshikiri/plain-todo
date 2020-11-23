@@ -18,14 +18,14 @@ function test_todo() {
 
 test_todo readme-example
 test_todo requires
-test_todo children-all-done "--mode date"
-test_todo requires-all-done "--mode date"
+test_todo children-all-done "--sort end"
+test_todo requires-all-done "--sort end"
 test_todo invalid
 test_todo stats "--stats"
 test_todo subtree "--subtree /1"
 
 test_todo print-memo-tree "--memo"
-test_todo print-memo-date "--memo --mode date"
+test_todo print-memo-date "--memo --sort end"
 
 if [ $count_failed -eq 0 ]; then
   echo "All tests passed"

@@ -71,12 +71,21 @@ export function mainPrint(argv: any) {
         }
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
-        if (argv.mode == "date") {
+        if (argv.sort == "end") {
           screenContent += createSortedByDateStr(
             tasks,
             dateFormat,
             targetStatuses,
-            showMemo
+            showMemo,
+            utils.compareDateEndStr
+          );
+        } else if (argv.sort == "start") {
+          screenContent += createSortedByDateStr(
+            tasks,
+            dateFormat,
+            targetStatuses,
+            showMemo,
+            utils.compareDateStartStr
           );
         } else {
           const aliases = utils.extractAliases(tasks);
