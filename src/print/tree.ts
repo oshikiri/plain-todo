@@ -6,7 +6,7 @@ import { sizes } from "./format";
 function buildLineModeTree(
   task: Task,
   dateFormat: string,
-  showStats: boolean
+  configs: any
 ): string {
   const date: string = task.end
     ? utils.stringifyDate(task.end, dateFormat)
@@ -22,7 +22,14 @@ function buildLineModeTree(
     " ".repeat(sizes.depthSize * (task.depth - 1)) +
     task.name;
 
-  if (showStats && task.children && task.children.length > 0) {
+  if (
+    configs["watch"] &&
+    (task.status == "done" || task.status == "cancelled")
+  ) {
+    line = `{grey-fg}${line}{/}`;
+  }
+
+  if (configs.showStats && task.children && task.children.length > 0) {
     const countTasks = (taskStatus: string): number => {
       return task.children.filter((task) => task.status === taskStatus).length;
     };
@@ -53,7 +60,7 @@ export function createTreeStr(
       continue;
     }
 
-    content += buildLineModeTree(task, dateFormat, configs["showStats"]) + "\n";
+    content += buildLineModeTree(task, dateFormat, configs) + "\n";
 
     if (showMemo && task.memo) {
       const indent = " ".repeat(
@@ -85,7 +92,7 @@ export function createTreeStr(
         requireTask.depth = task.depth + 1;
 
         if (targetStatuses.includes(requireTask.status)) {
-          content += buildLineModeTree(requireTask, dateFormat, false) + "\n";
+          content += buildLineModeTree(requireTask, dateFormat, configs) + "\n";
         }
       }
     }

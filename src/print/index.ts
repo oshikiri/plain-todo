@@ -22,6 +22,7 @@ export function mainPrint(argv: any) {
   const showMemo = argv.memo;
   const configs = {
     showStats: argv.stats,
+    watch: argv.watch,
   };
 
   let intervalId: number;
@@ -41,6 +42,7 @@ export function mainPrint(argv: any) {
       keys: true,
       vi: true,
       alwaysScroll: true,
+      tags: true,
     });
 
     screen.key("q", function () {
