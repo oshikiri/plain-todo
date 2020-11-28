@@ -1,9 +1,10 @@
 import * as jsyaml from "js-yaml";
 import * as fs from "fs";
+import { TodoYaml } from "../types";
 
-export function loadYaml(yamlPath: string): any {
+export function loadYaml(yamlPath: string): TodoYaml {
   const content = fs.readFileSync(yamlPath, "utf8");
-  return jsyaml.safeLoad(content);
+  return <any>jsyaml.safeLoad(content);
 }
 
 export function fileExists(path: string): boolean {

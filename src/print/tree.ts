@@ -1,4 +1,4 @@
-import { Task } from "./../types";
+import { Configs, Task } from "./../types";
 import * as utils from "./../utils";
 import { statusSymbols } from "./../constants/status_symbols";
 import { sizes } from "./format";
@@ -6,7 +6,7 @@ import { sizes } from "./format";
 function buildLineModeTree(
   task: Task,
   dateFormat: string,
-  configs: any
+  configs: Configs
 ): string {
   const date: string = task.end
     ? utils.stringifyDate(task.end, dateFormat)
@@ -33,7 +33,7 @@ function buildLineModeTree(
     const countTasks = (taskStatus: string): number => {
       return task.children.filter((task) => task.status === taskStatus).length;
     };
-    const counts: any = {};
+    const counts: { [name: string]: number } = {};
     Object.keys(statusSymbols).forEach((task) => {
       counts[task] = countTasks(task);
     });
@@ -52,7 +52,7 @@ export function createTreeStr(
   targetStatuses: string[],
   aliases: { [name: string]: Task },
   showMemo: boolean,
-  configs: any
+  configs: Configs
 ): string {
   let content = "";
   for (const task of tasks) {

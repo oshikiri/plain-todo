@@ -51,3 +51,17 @@ export class Arguments {
   subtree: string;
   sort: string;
 }
+
+export class TodoYaml {
+  title: string;
+  tasks: Task[];
+  configs: {
+    "date-format": string;
+    "max-length-task-name": number;
+  };
+}
+
+export class Configs {
+  watch: boolean;
+  showStats: boolean;
+}

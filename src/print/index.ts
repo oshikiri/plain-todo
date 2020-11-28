@@ -6,7 +6,7 @@ import { statuses as allStatuses } from "../constants/statuses";
 import { createSortedByDateStr, CompareTask } from "./date";
 import { createTreeStr } from "./tree";
 import * as io from "./io";
-import { Arguments } from "../types";
+import { Arguments, Configs } from "../types";
 
 export function mainPrint(argv: Arguments) {
   const yamlPath = argv.file;
@@ -21,7 +21,7 @@ export function mainPrint(argv: Arguments) {
   let lastModifiedAt = new Date(0);
 
   const showMemo = argv.memo;
-  const configs = {
+  const configs: Configs = {
     showStats: argv.stats,
     watch: argv.watch,
   };
@@ -59,7 +59,7 @@ export function mainPrint(argv: Arguments) {
       let screenContent = "";
 
       try {
-        const yml: any = io.loadYaml(yamlPath);
+        const yml = io.loadYaml(yamlPath);
         const maxLengthTaskName = yml.configs?.["max-length-task-name"] || 20;
         let tasks = utils.extractSubtree(yml.tasks, argv.subtree);
         tasks = utils.fillParentsInformations(

@@ -49,7 +49,7 @@ export function extractAliases(tasks: Task[]): { [name: string]: Task } {
 export function fillParentsInformations(
   tasks: Task[],
   parentAbsolutePath: string,
-  parentDates: any,
+  parentDates: string[],
   maxLengthTaskName: number,
   yamlPath: string
 ) {
