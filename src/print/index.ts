@@ -6,8 +6,9 @@ import { statuses as allStatuses } from "../constants/statuses";
 import { createSortedByDateStr, CompareTask } from "./date";
 import { createTreeStr } from "./tree";
 import * as io from "./io";
+import { Arguments } from "../types";
 
-export function mainPrint(argv: any) {
+export function mainPrint(argv: Arguments) {
   const yamlPath = argv.file;
   if (!io.fileExists(yamlPath)) {
     console.log(`Specified file does not exist: ${yamlPath}`);

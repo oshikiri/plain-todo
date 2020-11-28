@@ -41,3 +41,13 @@ export class Task {
       .reduce((acc, cur) => acc || cur, false);
   }
 }
+
+export class Arguments {
+  file: string;
+  include: string[];
+  memo: boolean;
+  watch: boolean;
+  stats: boolean;
+  subtree: string;
+  sort: string;
+}
