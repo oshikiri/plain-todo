@@ -3,7 +3,7 @@ const blessed = require("neo-blessed");
 import * as utils from "../utils";
 import { statuses as allStatuses } from "../constants/statuses";
 
-import { createSortedByDateStr } from "./date";
+import { createSortedByDateStr, CompareTask } from "./date";
 import { createTreeStr } from "./tree";
 import * as io from "./io";
 
@@ -74,21 +74,21 @@ export function mainPrint(argv: any) {
         }
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
-        if (argv.sort == "end") {
+        if (argv.sort != "default") {
+          let compare: CompareTask;
+          if (argv.sort == "end") {
+            compare = utils.compareDateEndStr;
+          } else if (argv.sort == "start") {
+            compare = utils.compareDateStartStr;
+          } else {
+            throw new Error(`Unknown --sort option: ${argv.sort}`);
+          }
           screenContent += createSortedByDateStr(
             tasks,
             dateFormat,
             targetStatuses,
             showMemo,
-            utils.compareDateEndStr
-          );
-        } else if (argv.sort == "start") {
-          screenContent += createSortedByDateStr(
-            tasks,
-            dateFormat,
-            targetStatuses,
-            showMemo,
-            utils.compareDateStartStr
+            compare
           );
         } else {
           const aliases = utils.extractAliases(tasks);

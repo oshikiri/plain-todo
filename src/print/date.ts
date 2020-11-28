@@ -3,6 +3,8 @@ import * as utils from "./../utils";
 import { statusSymbols } from "./../constants/status_symbols";
 import { sizes } from "./format";
 
+export type CompareTask = (x: Task, y: Task) => number;
+
 function buildLineModeDate(task: Task, dateFormat: string): string {
   const dateStart: string = task.start
     ? utils.stringifyDate(task.start, dateFormat)
@@ -27,7 +29,7 @@ export function createSortedByDateStr(
   dateFormat: string,
   targetStatuses: string[],
   showMemo: boolean,
-  sortFunction: (x: Task, y: Task) => number
+  sortFunction: CompareTask
 ): string {
   const flattened = utils.flattenTasks(tasks);
   flattened.sort(sortFunction);
