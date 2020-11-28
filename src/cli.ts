@@ -1,13 +1,7 @@
 #!/usr/bin/env node
 
 import { mainPrint } from "./print/index";
-import { statusSymbols } from "./constants/status_symbols";
-
-const statusSymbolsArray = [];
-for (const key in statusSymbols) {
-  statusSymbolsArray.push(`${key}:${statusSymbols[key]}`);
-}
-const statusSymbolsStr = statusSymbolsArray.join(", ");
+import { statusSymbolsStr } from "./constants/status_symbols";
 
 require("yargs")
   .command(
