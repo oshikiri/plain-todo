@@ -68,7 +68,8 @@ export function fillParentsInformations(
     tasks[i].isDefaultStatus = task.status === undefined;
     tasks[i].status = task.status || "todo";
     tasks[i].depth = dates.length - 1;
-    const date = dates
+    const date = []
+      .concat(dates)
       .reverse()
       .find((item: string | undefined) => item != undefined);
     if (date) {
