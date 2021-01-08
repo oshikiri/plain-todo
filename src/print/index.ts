@@ -20,7 +20,7 @@ export function mainPrint(argv: Arguments) {
     : argv.include;
   let lastModifiedAt = new Date(0);
 
-  const showMemo = argv.memo;
+  let showMemo = argv.memo;
   const configs: Configs = {
     showStats: argv.stats,
     watch: argv.watch,
@@ -49,6 +49,14 @@ export function mainPrint(argv: Arguments) {
     screen.key("q", function () {
       clearInterval(intervalId);
       return screen.destroy();
+    });
+    screen.key("m", function () {
+      showMemo = !showMemo;
+      lastModifiedAt = new Date(0);
+    });
+    screen.key("s", function () {
+      configs.showStats = !configs.showStats;
+      lastModifiedAt = new Date(0);
     });
   }
 
