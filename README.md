@@ -1,7 +1,7 @@
 plain-todo: A CLI todolist tool based on YAML file
 =====
 
-[![GitHub Workflows Status](https://github.com/oshikiri/plain-todo/workflows/test/badge.svg)](https://github.com/oshikiri/plain-todo/actions?query=workflow%3Atest)
+[![GitHub Workflows Status](https://github.com/oshikiri/plain-todo/workflows/test/badge.svg)](https://github.com/oshikiri/plain-todo/actions?query=workflow%3Atest) [![GitHub package](https://img.shields.io/github/package-json/v/oshikiri/plain-todo)](https://github.com/oshikiri/plain-todo/packages/575365/)
 
 
 ## Example
