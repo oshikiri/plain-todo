@@ -1,12 +1,13 @@
-plain-todo
+plain-todo: A CLI todolist tool based on YAML file
 =====
 
-![GitHub Workflows Status](https://github.com/oshikiri/plain-todo/workflows/test/badge.svg)
+[![GitHub Workflows Status](https://github.com/oshikiri/plain-todo/workflows/test/badge.svg)](https://github.com/oshikiri/plain-todo/actions?query=workflow%3Atest)
 
-A CLI todolist tool based on YAML file
 
-```sh
-$ cat test/fixtures/readme-example.todo.yml
+## Example
+```yaml
+# test/fixtures/readme-example.todo.yml
+
 title: Example tasks
 
 tasks:
@@ -27,7 +28,8 @@ tasks:
       - name: subtask3
         end: 2020-07-20
         status: done
-
+```
+```sh
 $ todo print test/fixtures/readme-example.todo.yml
 0810     task1
 0810         subtask1
