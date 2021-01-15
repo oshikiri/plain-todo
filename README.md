@@ -71,5 +71,5 @@ npm run build
 
 ### Install `todo` command to global environment
 ```sh
-npm install -g @oshikiri/plain-todo
+npm install -g .
 ```
