@@ -1,6 +1,6 @@
 {
   "name": "plain-todo",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "TODO app based on yaml",
   "main": "src/cli.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/oshikiri/plain-todo.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "build": "./node_modules/.bin/tsc",
