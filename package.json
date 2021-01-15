@@ -1,6 +1,6 @@
 {
   "name": "@oshikiri/plain-todo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "TODO app based on yaml",
   "main": "src/cli.js",
   "repository": {
