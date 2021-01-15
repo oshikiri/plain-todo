@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/oshikiri/plain-todo.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "format": "node_modules/.bin/prettier --write src/* docs/schema.json package.json",
