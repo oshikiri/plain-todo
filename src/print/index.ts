@@ -8,6 +8,8 @@ import { createTreeStr } from "./tree";
 import * as io from "./io";
 import { Arguments, Configs } from "../types";
 
+const sortTypes = ["default", "start", "end"];
+
 export function mainPrint(argv: Arguments) {
   const yamlPath = argv.file;
   if (!io.fileExists(yamlPath)) {
@@ -24,6 +26,7 @@ export function mainPrint(argv: Arguments) {
   const configs: Configs = {
     showStats: argv.stats,
     watch: argv.watch,
+    sortType: argv.sort,
   };
 
   let intervalId: number;
@@ -58,6 +61,11 @@ export function mainPrint(argv: Arguments) {
       configs.showStats = !configs.showStats;
       lastModifiedAt = new Date(0);
     });
+    screen.key("r", function () {
+      const i = sortTypes.indexOf(configs.sortType);
+      configs.sortType = sortTypes[(i + 1) % sortTypes.length];
+      lastModifiedAt = new Date(0);
+    });
   }
 
   function loop() {
@@ -83,14 +91,14 @@ export function mainPrint(argv: Arguments) {
         }
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
-        if (argv.sort != "default") {
+        if (configs.sortType != "default") {
           let compare: CompareTask;
-          if (argv.sort == "end") {
+          if (configs.sortType == "end") {
             compare = utils.compareDateEndStr;
-          } else if (argv.sort == "start") {
+          } else if (configs.sortType == "start") {
             compare = utils.compareDateStartStr;
           } else {
-            throw new Error(`Unknown --sort option: ${argv.sort}`);
+            throw new Error(`Unknown --sort option: ${configs.sortType}`);
           }
           screenContent += createSortedByDateStr(
             tasks,

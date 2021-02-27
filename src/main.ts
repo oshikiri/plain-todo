@@ -25,6 +25,12 @@ require("yargs")
     default: false,
     description: `Show using watch mode.
       Re-render if the yaml file is updated.
+
+      key binds:
+        q: Quit
+        m: Show memos
+        s: Show stats
+        r: Switch --sort
     `,
   })
   .option("include", {

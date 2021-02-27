@@ -64,4 +64,5 @@ export class TodoYaml {
 export class Configs {
   watch: boolean;
   showStats: boolean;
+  sortType: string;
 }
