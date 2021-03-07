@@ -27,9 +27,10 @@ require("yargs")
       Re-render if the yaml file is updated.
 
       key binds:
+        a: Show all statuses
         q: Quit
         m: Show memos
-        s: Show stats
+        s: Show statistics
         r: Switch --sort
     `,
   })

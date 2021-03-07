@@ -23,6 +23,7 @@ export function mainPrint(argv: Arguments) {
   let lastModifiedAt = new Date(0);
 
   let showMemo = argv.memo;
+  let showAllStatus = false;
   const configs: Configs = {
     showStats: argv.stats,
     watch: argv.watch,
@@ -52,6 +53,10 @@ export function mainPrint(argv: Arguments) {
     screen.key("q", function () {
       clearInterval(intervalId);
       return screen.destroy();
+    });
+    screen.key("a", function () {
+      showAllStatus = !showAllStatus;
+      lastModifiedAt = new Date(0);
     });
     screen.key("m", function () {
       showMemo = !showMemo;
@@ -91,6 +96,7 @@ export function mainPrint(argv: Arguments) {
         }
 
         const dateFormat = yml?.configs?.["date-format"] || "MMDD";
+        const statuses = showAllStatus ? allStatuses : targetStatuses;
         if (configs.sortType != "default") {
           let compare: CompareTask;
           if (configs.sortType == "end") {
@@ -103,7 +109,7 @@ export function mainPrint(argv: Arguments) {
           screenContent += createSortedByDateStr(
             tasks,
             dateFormat,
-            targetStatuses,
+            statuses,
             showMemo,
             compare
           );
@@ -112,7 +118,7 @@ export function mainPrint(argv: Arguments) {
           screenContent += createTreeStr(
             tasks,
             dateFormat,
-            targetStatuses,
+            statuses,
             aliases,
             showMemo,
             configs
