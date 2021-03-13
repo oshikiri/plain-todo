@@ -121,6 +121,7 @@ export function mainPrint(argv: Arguments) {
             statuses,
             aliases,
             showMemo,
+            maxLengthTaskName,
             configs
           );
         }

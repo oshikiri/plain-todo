@@ -6,7 +6,8 @@ import { sizes } from "./format";
 function buildLineModeTree(
   task: Task,
   dateFormat: string,
-  configs: Configs
+  configs: Configs,
+  maxLengthTaskName: number
 ): string {
   const date: string = task.end
     ? utils.stringifyDate(task.end, dateFormat)
@@ -16,11 +17,16 @@ function buildLineModeTree(
     ? ""
     : statusSymbols[task.status];
 
+  let taskName = task.name;
+  if (taskName.length > maxLengthTaskName) {
+    taskName = taskName.slice(0, maxLengthTaskName - 2) + "…";
+  }
+
   let line =
     date.padEnd(dateFormat.length + sizes.afterDate, " ") +
     status.padEnd(sizes.widthStatus + sizes.afterStatus, " ") +
     " ".repeat(sizes.depthSize * (task.depth - 1)) +
-    task.name;
+    taskName;
 
   if (
     configs["watch"] &&
@@ -52,6 +58,7 @@ export function createTreeStr(
   targetStatuses: string[],
   aliases: { [name: string]: Task },
   showMemo: boolean,
+  maxLengthTaskName: number,
   configs: Configs
 ): string {
   let content = "";
@@ -60,7 +67,8 @@ export function createTreeStr(
       continue;
     }
 
-    content += buildLineModeTree(task, dateFormat, configs) + "\n";
+    content +=
+      buildLineModeTree(task, dateFormat, configs, maxLengthTaskName) + "\n";
 
     if (showMemo && task.memo) {
       const indent = " ".repeat(
@@ -81,6 +89,7 @@ export function createTreeStr(
         targetStatuses,
         aliases,
         showMemo,
+        maxLengthTaskName,
         configs
       );
     }
@@ -92,7 +101,13 @@ export function createTreeStr(
         requireTask.depth = task.depth + 1;
 
         if (targetStatuses.includes(requireTask.status)) {
-          content += buildLineModeTree(requireTask, dateFormat, configs) + "\n";
+          content +=
+            buildLineModeTree(
+              requireTask,
+              dateFormat,
+              configs,
+              maxLengthTaskName
+            ) + "\n";
         }
       }
     }
