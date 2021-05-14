@@ -49,7 +49,8 @@ export function extractAliases(tasks: Task[]): { [name: string]: Task } {
 export function fillParentsInformations(
   tasks: Task[],
   parentAbsolutePath: string,
-  parentDates: string[],
+  parentDateStarts: string[],
+  parentDateEnds: string[],
   maxLengthTaskName: number,
   yamlPath: string
 ) {
@@ -61,25 +62,36 @@ export function fillParentsInformations(
     if (taskName.length > maxLengthTaskName) {
       taskName = taskName.slice(0, maxLengthTaskName - 2) + "…";
     }
-    const dates = parentDates.concat([task.end]);
+    const dateStarts = parentDateStarts.concat([task.start]);
+    const dateEnds = parentDateEnds.concat([task.end]);
     const absolutePath = parentAbsolutePath + "/" + taskName;
 
     tasks[i].absolutePath = absolutePath;
     tasks[i].isDefaultStatus = task.status === undefined;
     tasks[i].status = task.status || "todo";
-    tasks[i].depth = dates.length - 1;
-    const date = []
-      .concat(dates)
+    tasks[i].depth = dateEnds.length - 1;
+
+    const dateStart = []
+      .concat(dateStarts)
       .reverse()
       .find((item: string | undefined) => item != undefined);
-    if (date) {
-      tasks[i].end = date;
+    if (dateStart) {
+      tasks[i].start = dateStart;
+    }
+
+    const dateEnd = []
+      .concat(dateEnds)
+      .reverse()
+      .find((item: string | undefined) => item != undefined);
+    if (dateEnd) {
+      tasks[i].end = dateEnd;
     }
     if (task.hasChildren()) {
       tasks[i].children = fillParentsInformations(
         task.children,
         absolutePath,
-        dates,
+        dateStarts,
+        dateEnds,
         maxLengthTaskName,
         yamlPath
       );
@@ -91,7 +103,8 @@ export function fillParentsInformations(
         const tasksImport = fillParentsInformations(
           yml.tasks,
           absolutePath,
-          dates,
+          dateStarts,
+          dateEnds,
           maxLengthTaskName,
           yamlPathImport
         );
