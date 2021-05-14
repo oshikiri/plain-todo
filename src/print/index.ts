@@ -87,6 +87,7 @@ export function mainPrint(argv: Arguments) {
           tasks,
           "",
           [undefined],
+          [undefined],
           maxLengthTaskName,
           yamlPath
         );

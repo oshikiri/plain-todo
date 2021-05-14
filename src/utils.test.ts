@@ -17,7 +17,7 @@ const content = {
   ],
 };
 const tasksFixture = [new Task(content as Task)];
-const tasksFilled = fillParentsInformations(tasksFixture, "", [], 20, "");
+const tasksFilled = fillParentsInformations(tasksFixture, "", [], [], 20, "");
 
 test("when task.end exists and parent task.end exists, it should use the original task.end", () => {
   const actual = tasksFilled[0].children[0].end;
