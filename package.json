@@ -24,7 +24,7 @@
     "dayjs": "^1.10.4",
     "js-yaml": "^4.1.0",
     "neo-blessed": "^0.2.0",
-    "yargs": "^16.2.0"
+    "yargs": "^17.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
