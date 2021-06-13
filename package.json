@@ -1,6 +1,6 @@
 {
   "name": "plain-todo",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "TODO app based on yaml",
   "main": "src/cli.js",
   "repository": {
@@ -8,8 +8,8 @@
     "url": "https://github.com/oshikiri/plain-todo.git"
   },
   "scripts": {
-    "build": "./node_modules/.bin/tsc",
-    "format": "node_modules/.bin/prettier --write src/* docs/schema.json package.json",
+    "build": "tsc",
+    "format": "prettier --write src/* docs/schema.json package.json",
     "test": "jest"
   },
   "bin": {
