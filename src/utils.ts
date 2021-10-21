@@ -2,7 +2,7 @@ import * as dayjs from "dayjs";
 import * as path from "path";
 
 import { Task } from "./types";
-import * as io from "./print/io";
+import * as io from "./io";
 
 export function stringifyDate(dateStr: string, dateFormat: string) {
   return dayjs(dateStr).format(dateFormat);

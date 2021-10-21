@@ -1,3 +1,4 @@
+import { mainHtml } from "./html/index";
 import { mainPrint } from "./print/index";
 import { statusSymbolsStr } from "./constants/status_symbols";
 
@@ -14,6 +15,16 @@ require("yargs")
       });
     },
     mainPrint
+  )
+  .command(
+    "html [file]",
+    "(experimental) Render as HTML",
+    (yargs: any) => {
+      yargs.positional("file", {
+        describe: "YAML file",
+      });
+    },
+    mainHtml
   )
   .option("memo", {
     type: "boolean",

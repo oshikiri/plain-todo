@@ -1,0 +1,46 @@
+.tasks {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.task {
+  background-color: lightgrey;
+  border-radius: 30px;
+  padding: 15px;
+  margin: 20px;
+}
+
+.task-name {
+  font-size: 20px;
+  font: bold;
+}
+
+.task-dates {
+  color: grey;
+}
+
+span.task-date:empty {
+  padding-right: 92.08px;
+  display: inline-block;
+  background: lime;
+}
+
+a {
+  color: steelblue;
+  word-wrap: break-word;
+}
+
+blockquote {
+  position: relative;
+  border-left: 3px solid lightcoral;
+}
+blockquote:before {
+  position: absolute;
+  content: "“";
+  font-size: 50px;
+  color: lightcoral;
+}
+blockquote p {
+  position: relative;
+  padding-left: 30px;
+}
