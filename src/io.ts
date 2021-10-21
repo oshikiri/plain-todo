@@ -1,6 +1,6 @@
 import * as jsyaml from "js-yaml";
 import * as fs from "fs";
-import { TodoYaml } from "../types";
+import { TodoYaml } from "./types";
 
 export function loadYaml(yamlPath: string): TodoYaml {
   const content = fs.readFileSync(yamlPath, "utf8");

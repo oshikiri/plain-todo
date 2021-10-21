@@ -5,7 +5,7 @@ import { statuses as allStatuses } from "../constants/statuses";
 
 import { createSortedByDateStr, CompareTask } from "./date";
 import { createTreeStr } from "./tree";
-import * as io from "./io";
+import * as io from "../io";
 import { Arguments, Configs } from "../types";
 
 const sortTypes = ["default", "start", "end"];
