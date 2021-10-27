@@ -25,6 +25,10 @@ span.task-date:empty {
   background: lime;
 }
 
+.task-status::before {
+  content: "・ ";
+}
+
 a {
   color: steelblue;
   word-wrap: break-word;

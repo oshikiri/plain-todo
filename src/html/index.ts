@@ -42,6 +42,11 @@ export function mainHtml(argv: Arguments) {
 
   // TODO: use DOM library
   console.log(`
+    <head>
+    </head>
+    <body>
+  `);
+  console.log(`
     <style>
         ${fs.readFileSync(__dirname + "/style.css", "utf8")}
     </style>
@@ -53,11 +58,14 @@ export function mainHtml(argv: Arguments) {
     const start = task.start ? dayjs(task.start).format("YYYY-MM-DD") : "";
     const end = task.end ? dayjs(task.end).format("YYYY-MM-DD") : "";
     console.log(`<div class="task-dates">
-      <span class="task-date">${start}</span> ― <span class="task-date">${end}</span></div>`);
+      <span class="task-date">${start}</span> ― <span class="task-date">${end}</span>
+      <span class="task-status">${task.status}</span>
+    </div>`);
     if (task.memo) {
       console.log(marked(task.memo));
     }
     console.log("</div>");
   }
   console.log("</div>");
+  console.log("</body>");
 }
