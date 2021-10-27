@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "chmod +x built/cli.js && cp src/html/style.css built/html/",
     "format": "prettier --write src/* docs/schema.json package.json",
     "test": "jest"
   },
