@@ -43,6 +43,7 @@ export function mainHtml(argv: Arguments) {
   // TODO: use DOM library
   console.log(`
     <head>
+      <meta charset="UTF-8">
     </head>
     <body>
   `);
