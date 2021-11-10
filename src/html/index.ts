@@ -17,30 +17,41 @@ import { Arguments, Task } from "../types";
 import * as utils from "../utils";
 
 export function mainHtml(argv: Arguments) {
-  const yamlPath = argv.file;
-  if (!io.fileExists(yamlPath)) {
-    console.log(`Specified file does not exist: ${yamlPath}`);
-    return;
+  let prevHtml = "";
+  function loop() {
+    const yamlPath = argv.file;
+    if (!io.fileExists(yamlPath)) {
+      console.log(`Specified file does not exist: ${yamlPath}`);
+      return;
+    }
+    const yml = io.loadYaml(yamlPath);
+
+    const maxLengthTaskName = 100;
+    let tasks = utils.extractSubtree(yml.tasks, argv.subtree);
+    tasks = utils.fillParentsInformations(
+      tasks,
+      "",
+      [undefined],
+      [undefined],
+      maxLengthTaskName,
+      yamlPath
+    );
+
+    tasks = utils
+      .flattenTasks(tasks)
+      .filter((t) => t.children.length == 0 && t.status != "todo")
+      .sort((t1, t2) => dayjs(t1.end).diff(dayjs(t2.end)));
+
+    const nextHtml = toHtml(tasks);
+    if (prevHtml != nextHtml) {
+      fs.writeFileSync(argv.out, nextHtml);
+      prevHtml = nextHtml;
+    }
   }
-  const yml = io.loadYaml(yamlPath);
-
-  const maxLengthTaskName = 100;
-  let tasks = utils.extractSubtree(yml.tasks, argv.subtree);
-  tasks = utils.fillParentsInformations(
-    tasks,
-    "",
-    [undefined],
-    [undefined],
-    maxLengthTaskName,
-    yamlPath
-  );
-
-  tasks = utils
-    .flattenTasks(tasks)
-    .filter((t) => t.children.length == 0 && t.status != "todo")
-    .sort((t1, t2) => dayjs(t1.end).diff(dayjs(t2.end)));
-
-  console.log(toHtml(tasks));
+  loop();
+  if (argv.watch) {
+    setInterval(loop, 1000);
+  }
 }
 
 function toHtml(tasks: Task[]) {

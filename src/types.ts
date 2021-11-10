@@ -50,6 +50,7 @@ export class Arguments {
   stats: boolean;
   subtree: string;
   sort: string;
+  out: string;
 }
 
 export class TodoYaml {
