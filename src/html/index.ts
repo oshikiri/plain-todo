@@ -13,7 +13,7 @@ marked.setOptions({
 });
 
 import * as io from "../io";
-import { Arguments } from "../types";
+import { Arguments, Task } from "../types";
 import * as utils from "../utils";
 
 export function mainHtml(argv: Arguments) {
@@ -40,33 +40,40 @@ export function mainHtml(argv: Arguments) {
     .filter((t) => t.children.length == 0 && t.status != "todo")
     .sort((t1, t2) => dayjs(t1.end).diff(dayjs(t2.end)));
 
+  console.log(toHtml(tasks));
+}
+
+function toHtml(tasks: Task[]) {
   // TODO: use DOM library
-  console.log(`
+  const htmlTags = [];
+  htmlTags.push(`
     <head>
       <meta charset="UTF-8">
     </head>
     <body>
   `);
-  console.log(`
+  htmlTags.push(`
     <style>
         ${fs.readFileSync(__dirname + "/style.css", "utf8")}
     </style>
   `);
-  console.log(`<div class="tasks">`);
+  htmlTags.push(`<div class="tasks">`);
   for (const task of tasks) {
-    console.log(`<div class="task">`);
-    console.log(`<div class="task-name">${task.absolutePath}</div>`);
+    htmlTags.push(`<div class="task">`);
+    htmlTags.push(`<div class="task-name">${task.absolutePath}</div>`);
     const start = task.start ? dayjs(task.start).format("YYYY-MM-DD") : "";
     const end = task.end ? dayjs(task.end).format("YYYY-MM-DD") : "";
-    console.log(`<div class="task-dates">
+    htmlTags.push(`<div class="task-dates">
       <span class="task-date">${start}</span> ― <span class="task-date">${end}</span>
       <span class="task-status">${task.status}</span>
     </div>`);
     if (task.memo) {
-      console.log(marked(task.memo));
+      htmlTags.push(marked(task.memo));
     }
-    console.log("</div>");
+    htmlTags.push("</div>");
   }
-  console.log("</div>");
-  console.log("</body>");
+  htmlTags.push("</div>");
+  htmlTags.push("</body>");
+
+  return htmlTags.join("\n");
 }
