@@ -42,7 +42,7 @@ export function mainHtml(argv: Arguments) {
       .filter((t) => t.children.length == 0 && t.status != "todo")
       .sort((t1, t2) => dayjs(t1.end).diff(dayjs(t2.end)));
 
-    const nextHtml = toHtml(tasks);
+    const nextHtml = toHtml(yml.title, tasks);
     if (prevHtml != nextHtml) {
       fs.writeFileSync(argv.out, nextHtml);
       prevHtml = nextHtml;
@@ -54,12 +54,13 @@ export function mainHtml(argv: Arguments) {
   }
 }
 
-function toHtml(tasks: Task[]) {
+function toHtml(title: string, tasks: Task[]) {
   // TODO: use DOM library
   const htmlTags = [];
   htmlTags.push(`
     <head>
       <meta charset="UTF-8">
+      <title>${title}</title>
     </head>
     <body>
   `);
