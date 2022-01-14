@@ -3,6 +3,8 @@ import * as fs from "fs";
 import dayjs = require("dayjs");
 import * as marked from "marked";
 
+const browserSync = require("browser-sync");
+
 marked.setOptions({
   renderer: new marked.Renderer(),
   pedantic: false,
@@ -15,8 +17,20 @@ marked.setOptions({
 import * as io from "../io";
 import { Arguments, Task } from "../types";
 import * as utils from "../utils";
+import path = require("path");
 
 export function mainHtml(argv: Arguments) {
+  if (argv.watch) {
+    if (argv.out) {
+      console.log(`Overwrite argv.out because of watch mode`);
+    }
+    const dir = "/tmp/plain-todo";
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    }
+    argv.out = `${dir}/index.html`;
+  }
+
   let prevHtml = "";
   function loop() {
     const yamlPath = argv.file;
@@ -45,11 +59,15 @@ export function mainHtml(argv: Arguments) {
     const nextHtml = toHtml(yml.title, tasks);
     if (prevHtml != nextHtml) {
       fs.writeFileSync(argv.out, nextHtml);
+      browserSync.reload(argv.out);
       prevHtml = nextHtml;
     }
   }
   loop();
   if (argv.watch) {
+    browserSync.init({
+      server: path.dirname(argv.out),
+    });
     setInterval(loop, 1000);
   }
 }
