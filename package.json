@@ -25,7 +25,7 @@
     "browser-sync": "^2.27.7",
     "dayjs": "^1.10.7",
     "js-yaml": "^4.1.0",
-    "marked": "^3.0.7",
+    "marked": "^4.0.10",
     "neo-blessed": "^0.2.0",
     "yargs": "^17.2.1"
   },
