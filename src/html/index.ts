@@ -98,7 +98,7 @@ function toHtml(title: string, tasks: Task[]) {
       <span class="task-status">${task.status}</span>
     </div>`);
     if (task.memo) {
-      htmlTags.push(marked(task.memo));
+      htmlTags.push(marked.parse(task.memo));
     }
     htmlTags.push("</div>");
   }
