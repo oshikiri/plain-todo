@@ -39,10 +39,6 @@ a {
   word-wrap: break-word;
 }
 
-img {
-  width: 100%;
-}
-
 blockquote {
   position: relative;
   border-left: 3px solid lightcoral;
