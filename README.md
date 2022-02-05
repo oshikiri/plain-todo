@@ -43,11 +43,10 @@ $ todo print test/fixtures/readme-example.todo.yml --sort end
 
 ## Setting for VS Code
 
-You can run schema validation and auto-completion using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
+You can run schema validation and auto-completion using [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) as follows.
 
+### .vscode/settings.json
 ```json
-// .vscode/settings.json
-
 {
   "yaml.schemas": {
     "https://oshikiri.github.io/plain-todo/schema.json": [
@@ -59,16 +58,6 @@ You can run schema validation and auto-completion using [redhat.vscode-yaml](htt
 ```
 
 ## Development
-### Install dependencies
-```sh
-npm install
-```
-
-### Build
-```sh
-npm run build
-```
-
 ### Install `todo` command to global environment
 ```sh
 npm install -g .
