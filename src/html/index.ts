@@ -67,6 +67,7 @@ export function mainHtml(argv: Arguments) {
   if (argv.watch) {
     browserSync.init({
       server: path.dirname(argv.out),
+      snippetOptions: {},
     });
     setInterval(loop, 1000);
   }
@@ -82,6 +83,7 @@ function toHtml(title: string, tasks: Task[]) {
       <title>${title}</title>
     </head>
     <body>
+      <script async src="/browser-sync/browser-sync-client.js"></script>
   `);
   htmlTags.push(`
     <style>

@@ -8,6 +8,7 @@
     "url": "https://github.com/oshikiri/plain-todo.git"
   },
   "scripts": {
+    "postinstall": "patch --forward --unified node_modules/browser-sync/dist/server/utils.js < scripts/turn-off-getsnippetmiddleware.patch || true",
     "build": "tsc",
     "postbuild": "chmod +x built/cli.js && cp src/html/style.css built/html/",
     "format": "prettier --write src/* docs/schema.json package.json",

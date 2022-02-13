@@ -1,0 +1,19 @@
+# See https://github.com/BrowserSync/browser-sync/issues/910#issuecomment-1038083415
+
+@@ -122,11 +122,11 @@
+                 route: "",
+                 handle: snippet.isOldIe(bs.options.get("excludedFileTypes").toJS())
+             },
+-            {
+-                id: "Browsersync Response Modifier",
+-                route: "",
+-                handle: serverUtils.getSnippetMiddleware(bs)
+-            },
++            // {
++            //     id: "Browsersync Response Modifier",
++            //     route: "",
++            //     handle: serverUtils.getSnippetMiddleware(bs)
++            // },
+             {
+                 id: "Browsersync Client - versioned",
+                 route: bs.options.getIn(["scriptPaths", "versioned"]),
