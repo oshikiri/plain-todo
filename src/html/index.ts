@@ -68,6 +68,7 @@ export function mainHtml(argv: Arguments) {
     browserSync.init({
       server: path.dirname(argv.out),
       snippetOptions: {},
+      open: false,
     });
     setInterval(loop, 1000);
   }
