@@ -8,7 +8,6 @@ const browserSync = require("browser-sync");
 marked.setOptions({
   renderer: new marked.Renderer(),
   pedantic: false,
-  breaks: true,
   sanitize: false,
   smartypants: false,
   xhtml: false,
