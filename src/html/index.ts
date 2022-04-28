@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import dayjs = require("dayjs");
-import * as marked from "marked";
+import { marked } from "marked";
 
 const browserSync = require("browser-sync");
 
@@ -24,7 +24,7 @@ export function mainHtml(argv: Arguments) {
       console.log(`Overwrite argv.out because of watch mode`);
     }
     const dir = "/tmp/plain-todo";
-    if (!fs.existsSync(dir)){
+    if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
     argv.out = `${dir}/index.html`;
