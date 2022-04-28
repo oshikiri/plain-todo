@@ -52,7 +52,7 @@ export function mainHtml(argv: Arguments) {
 
     tasks = utils
       .flattenTasks(tasks)
-      .filter((t) => t.children.length == 0 && t.status != "todo")
+      .filter((t) => t.status != "todo")
       .sort((t1, t2) => dayjs(t1.end).diff(dayjs(t2.end)));
 
     const nextHtml = toHtml(yml.title, tasks);
