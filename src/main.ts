@@ -42,7 +42,8 @@ require("yargs")
         q: Quit
         m: Show memos
         s: Show statistics
-        r: Switch --sort
+        t: Switch --sort
+        r: Reload
     `,
   })
   .option("include", {

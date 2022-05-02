@@ -66,9 +66,12 @@ export function mainPrint(argv: Arguments) {
       configs.showStats = !configs.showStats;
       lastModifiedAt = new Date(0);
     });
-    screen.key("r", function () {
+    screen.key("t", function () {
       const i = sortTypes.indexOf(configs.sortType);
       configs.sortType = sortTypes[(i + 1) % sortTypes.length];
+      lastModifiedAt = new Date(0);
+    });
+    screen.key("r", function () {
       lastModifiedAt = new Date(0);
     });
   }
