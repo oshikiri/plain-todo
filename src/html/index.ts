@@ -106,6 +106,11 @@ function toHtml(title: string, tasks: Task[]) {
     htmlTags.push("</div>");
   }
   htmlTags.push("</div>");
+  htmlTags.push(`
+    <script>
+      ${fs.readFileSync(__dirname + "/index.js.txt", "utf8")}
+    </script>
+  `);
   htmlTags.push("</body>");
 
   return htmlTags.join("\n");
