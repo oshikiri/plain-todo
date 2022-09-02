@@ -2,6 +2,7 @@ import * as fs from "fs";
 
 import dayjs = require("dayjs");
 import { marked } from "marked";
+import { JSDOM } from "jsdom";
 
 const browserSync = require("browser-sync");
 
@@ -73,45 +74,54 @@ export function mainHtml(argv: Arguments) {
   }
 }
 
-function toHtml(title: string, tasks: Task[]) {
-  // TODO: use DOM library
-  const htmlTags = [];
-  htmlTags.push(`
-    <head>
-      <meta charset="UTF-8">
-      <link rel="icon" href="data:;base64,=">
-      <title>${title}</title>
-    </head>
-    <body>
-      <script async src="/browser-sync/browser-sync-client.js"></script>
-  `);
-  htmlTags.push(`
+function toHtml(title: string, tasks: Task[]): string {
+  const doc = new JSDOM("<!DOCTYPE html>");
+  const document = doc.window.document;
+
+  document.head.appendChild(
+    JSDOM.fragment(`
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:;base64,=">
+    <title>${title}</title>
+  `)
+  );
+
+  const body = doc.window.document.body;
+  body.appendChild(
+    JSDOM.fragment(`
+    <script async src="/browser-sync/browser-sync-client.js"></script>
     <style>
         ${fs.readFileSync(__dirname + "/style.css", "utf8")}
     </style>
-  `);
-  htmlTags.push(`<div class="tasks">`);
-  for (const task of tasks) {
-    htmlTags.push(`<div class="task">`);
-    htmlTags.push(`<div class="task-name">${task.absolutePath}</div>`);
-    const start = task.start ? dayjs(task.start).format("YYYY-MM-DD") : "";
-    const end = task.end ? dayjs(task.end).format("YYYY-MM-DD") : "";
-    htmlTags.push(`<div class="task-dates">
-      <span class="task-date">${start}</span> ― <span class="task-date">${end}</span>
-      <span class="task-status">${task.status}</span>
-    </div>`);
-    if (task.memo) {
-      htmlTags.push(marked.parse(task.memo));
-    }
-    htmlTags.push("</div>");
-  }
-  htmlTags.push("</div>");
-  htmlTags.push(`
+    <div class="tasks"></div>
     <script>
       ${fs.readFileSync(__dirname + "/index.js.txt", "utf8")}
     </script>
-  `);
-  htmlTags.push("</body>");
+  `)
+  );
 
-  return htmlTags.join("\n");
+  const tasksElement = body.querySelector("div.tasks");
+  for (const task of tasks) {
+    const taskRoot = JSDOM.fragment('<div class="task"></div>');
+    const taskFragment = taskRoot.firstChild;
+
+    const start = task.start ? dayjs(task.start).format("YYYY-MM-DD") : "";
+    const end = task.end ? dayjs(task.end).format("YYYY-MM-DD") : "";
+    taskFragment.appendChild(
+      JSDOM.fragment(`
+      <div class="task-name">${task.absolutePath}</div>
+      <div class="task-dates">
+        <span class="task-date">${start}</span> ― <span class="task-date">${end}</span>
+        <span class="task-status">${task.status}</span>
+      </div>
+    `)
+    );
+    if (task.memo) {
+      taskFragment.appendChild(JSDOM.fragment(marked.parse(task.memo)));
+    }
+
+    tasksElement.appendChild(taskFragment);
+  }
+
+  return doc.serialize();
 }

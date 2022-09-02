@@ -23,9 +23,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/jsdom": "^20.0.0",
     "browser-sync": "^2.27.9",
     "dayjs": "^1.11.1",
     "js-yaml": "^4.1.0",
+    "jsdom": "^20.0.0",
     "marked": "^4.0.14",
     "neo-blessed": "^0.2.0",
     "yargs": "^17.4.1"
