@@ -4,7 +4,7 @@ body {
 }
 
 .tasks {
-  width: 700px;
+  width: calc(min(100vw, 700px) - 40px);
   margin: 0 auto;
 }
 
@@ -13,6 +13,7 @@ body {
   border-radius: 30px;
   padding: 15px;
   margin: 20px;
+  overflow: scroll;
 }
 
 .task-name {

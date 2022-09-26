@@ -81,6 +81,7 @@ function toHtml(title: string, tasks: Task[]): string {
   document.head.appendChild(
     JSDOM.fragment(`
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
     <link rel="icon" href="data:;base64,=">
     <title>${title}</title>
   `)
