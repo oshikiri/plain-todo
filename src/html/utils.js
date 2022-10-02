@@ -18,3 +18,11 @@ document.addEventListener("keydown", (event) => {
     behavior: "smooth",
   });
 });
+
+const scrollToBottom = document.getElementById("scroll_to_bottom");
+scrollToBottom.addEventListener("click", (event) => {
+  const tailTask = tasks[tasks.length - 1];
+  tailTask.scrollIntoView({
+    behavior: "smooth",
+  });
+});

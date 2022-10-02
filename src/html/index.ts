@@ -90,13 +90,14 @@ function toHtml(title: string, tasks: Task[]): string {
   const body = doc.window.document.body;
   body.appendChild(
     JSDOM.fragment(`
+    <div id="scroll_to_bottom"></div>
     <script async src="/browser-sync/browser-sync-client.js"></script>
     <style>
         ${fs.readFileSync(__dirname + "/style.css", "utf8")}
     </style>
     <div class="tasks"></div>
     <script>
-      ${fs.readFileSync(__dirname + "/index.js.txt", "utf8")}
+      ${fs.readFileSync(__dirname + "/utils.js", "utf8")}
     </script>
   `)
   );

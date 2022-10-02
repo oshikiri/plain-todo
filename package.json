@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "patch --forward --unified node_modules/browser-sync/dist/server/utils.js < scripts/turn-off-getsnippetmiddleware.patch || true",
     "build": "tsc",
-    "postbuild": "chmod +x built/cli.js && cp src/html/style.css built/html/ && cp src/html/index.js.txt built/html/",
+    "postbuild": "chmod +x built/cli.js && cp src/html/style.css built/html/ && cp src/html/utils.js built/html/",
     "format": "prettier --write src/* docs/schema.json package.json",
     "test": "jest"
   },

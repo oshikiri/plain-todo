@@ -13,7 +13,7 @@ body {
   border-radius: 30px;
   padding: 15px;
   margin: 20px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .task-name {
@@ -57,4 +57,15 @@ blockquote p {
 
 pre {
   white-space: pre-wrap;
+}
+
+#scroll_to_bottom {
+  position: fixed;
+  background-color: grey;
+  right: 0;
+  bottom: 0;
+}
+
+#scroll_to_bottom::after {
+  content: "Go to bottom";
 }
